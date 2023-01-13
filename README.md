@@ -1,5 +1,6 @@
 ## What is this
-A simple discord.js v14 template w/ (slash) command & event handler. 
+
+A simple discord.js v14 template w/ (slash) command & event handler.
 Will probably be used for my projects. Everyone is free to use this, but i have no time to actually offer support to anyone, so no.
 
 ## Terms of use<sup>[[?]](https://github.com/Tyrrrz/)</sup>

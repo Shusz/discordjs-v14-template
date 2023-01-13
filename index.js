@@ -3,7 +3,7 @@ const { ActivityType, GatewayIntentBits, REST, Routes } = require("discord.js");
 const prompt = require("prompt-sync")(),
   fs = require("fs"),
   discordjs = require("discord.js");
-var instellingen = JSON.parse(fs.readFileSync("settings.json"));
+var settings = JSON.parse(fs.readFileSync("settings.json"));
 process.on("uncaughtException", (error, orgi) => {
   let ts = Date.now();
   let date_ob = new Date(ts);
@@ -15,7 +15,7 @@ process.on("uncaughtException", (error, orgi) => {
   let sec = date_ob.getSeconds();
   fs.appendFileSync(
     "log",
-    `[ERROR] [${year}/${month}/${date} | ${hour}:${min}:${sec}] Er is een error gebeurd: \n` +
+    `[ERROR] [${year}/${month}/${date} | ${hour}:${min}:${sec}] An error has occured: \n` +
       error +
       `\n(origin): ` +
       orgi +
@@ -33,10 +33,10 @@ const bot = new discordjs.Client({
 });
 function saveData(m) {
   if (m == "m") {
-    fs.writeFileSync("settings.json", JSON.stringify(instellingen, null, 4));
+    fs.writeFileSync("settings.json", JSON.stringify(settings, null, 4));
     console.log("[INFO] [MANUAL] Data has been saved.");
   } else {
-    fs.writeFileSync("settings.json", JSON.stringify(instellingen, null, 4));
+    fs.writeFileSync("settings.json", JSON.stringify(settings, null, 4));
     console.log("[INFO] [AUTO] Data has been (automatically) saved.");
   }
 }
@@ -58,14 +58,14 @@ fs.readdirSync("./events").forEach(async (file) => {
     bot.on(event.name, (...args) => event.execute(...args));
   }
 });
-const rest = new REST({ version: "10" }).setToken(instellingen["bot"]["token"]);
+const rest = new REST({ version: "10" }).setToken(settings["bot"]["token"]);
 (async () => {
   try {
     // The put method is used to fully refresh all commands in the guild with the current set
     const data = await rest.put(
       Routes.applicationGuildCommands(
-        instellingen["bot"]["clientID"],
-        instellingen["bot"]["guildID"]
+        settings["bot"]["clientID"],
+        settings["bot"]["guildID"]
       ),
       { body: commands }
     );
@@ -98,7 +98,7 @@ bot.on(discordjs.Events.InteractionCreate, async (interaction) => {
     let sec = date_ob.getSeconds();
     fs.appendFileSync(
       "log",
-      `[ERROR] [${year}/${month}/${date} | ${hour}:${min}:${sec}] Er is een error gebeurd: \n` +
+      `[ERROR] [${year}/${month}/${date} | ${hour}:${min}:${sec}] An error has occured: \n` +
         error
     );
     await interaction.reply({
@@ -108,4 +108,4 @@ bot.on(discordjs.Events.InteractionCreate, async (interaction) => {
   }
 });
 
-bot.login(instellingen["bot"]["token"]);
+bot.login(settings["bot"]["token"]);
