@@ -1,8 +1,9 @@
-const { ActivityType, GatewayIntentBits, REST, Routes } = require("discord.js");
+const { GatewayIntentBits, REST, Routes } = require("discord.js");
 
 const prompt = require("prompt-sync")(),
   fs = require("fs"),
   discordjs = require("discord.js");
+
 var settings = JSON.parse(fs.readFileSync("settings.json"));
 process.on("uncaughtException", (error, orgi) => {
   let ts = Date.now();
@@ -31,18 +32,6 @@ const bot = new discordjs.Client({
     GatewayIntentBits.GuildMembers,
   ],
 });
-function saveData(m) {
-  if (m == "m") {
-    fs.writeFileSync("settings.json", JSON.stringify(settings, null, 4));
-    console.log("[INFO] [MANUAL] Data has been saved.");
-  } else {
-    fs.writeFileSync("settings.json", JSON.stringify(settings, null, 4));
-    console.log("[INFO] [AUTO] Data has been (automatically) saved.");
-  }
-}
-setInterval(function () {
-  saveData();
-}, 30000);
 bot.commands = new discordjs.Collection();
 const commands = [];
 fs.readdirSync("./commands").forEach(async (file) => {
@@ -64,8 +53,8 @@ const rest = new REST({ version: "10" }).setToken(settings["bot"]["token"]);
     // The put method is used to fully refresh all commands in the guild with the current set
     const data = await rest.put(
       Routes.applicationGuildCommands(
-        settings["bot"]["clientID"],
-        settings["bot"]["guildID"]
+        settings.bot.clientID,
+        settings.bot.guildID
       ),
       { body: commands }
     );
@@ -108,4 +97,4 @@ bot.on(discordjs.Events.InteractionCreate, async (interaction) => {
   }
 });
 
-bot.login(settings["bot"]["token"]);
+bot.login(settings.bot.token);

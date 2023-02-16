@@ -1,7 +1,7 @@
 ## What is this
 
 A simple discord.js v14 template w/ (slash) command & event handler.
-Will probably be used for my projects. Everyone is free to use this, but i have no time to actually offer support to anyone, so no.
+Will probably be used for my projects. Everyone is free to use this. I'm happy to provide support for beginners- please open an issue (preferred) or DM me on discord: hexlocation#0887.
 
 ## Terms of use<sup>[[?]](https://github.com/Tyrrrz/)</sup>
 
