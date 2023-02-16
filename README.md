@@ -13,3 +13,8 @@ By using this project or its source code, for any purpose and in any shape or fo
 - You **reject false narratives perpetuated by Russian state propaganda**
 
 To learn more about the war and how you can help, [click here](https://tyrrrz.me). Glory to Ukraine! 🇺🇦 (This TOU has been copied from https://github.com/Tyrrrz/)
+
+## Source(s)
+
+https://discordjs.guide/creating-your-bot/command-handling.html#executing-commands  
+https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands
